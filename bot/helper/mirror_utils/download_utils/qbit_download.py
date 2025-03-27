@@ -75,21 +75,27 @@ async def add_qb_torrent(link, path, listener, ratio, seed_time):
 
         await listener.onDownloadStart()
 
-        if config_dict['BASE_URL'] and listener.select:
-            if link.startswith('magnet:'):
+        if config_dict["BASE_URL"] and listener.select:
+            if link.startswith("magnet:"):
                 metamsg = "Downloading Metadata, wait then you can select files. Use torrent file to avoid this wait."
                 meta = await sendMessage(listener.message, metamsg)
                 while True:
-                    tor_info = await sync_to_async(client.torrents_info, tag=f'{listener.uid}')
+                    tor_info = await sync_to_async(
+                        client.torrents_info, tag=f"{listener.uid}"
+                    )
                     if len(tor_info) == 0:
                         await deleteMessage(meta)
                         return
                     try:
                         tor_info = tor_info[0]
-                        if tor_info.state not in ["metaDL", "checkingResumeData", "pausedDL"]:
+                        if tor_info.state not in [
+                            "metaDL",
+                            "checkingResumeData",
+                            "pausedDL",
+                        ]:
                             await deleteMessage(meta)
                             break
-                    except:
+                    except Exception:
                         await deleteMessage(meta)
                         return
 
