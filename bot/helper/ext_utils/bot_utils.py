@@ -564,7 +564,7 @@ async def get_stats(event, key="home"):
         # Owner check
         if event.from_user.id != OWNER_ID:
             # Popup alert for non-owner
-            await event.answer("🚫 Only Owner can check Repo Stats!", show_alert=True)
+            await event.answer("🚫 Only Owner Can Check Repo Stats!", show_alert=True)
             return
 
         last_commit, changelog = 'No Data', 'N/A'
