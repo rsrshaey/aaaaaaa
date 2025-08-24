@@ -507,7 +507,7 @@ async def get_stats(event, key="home"):
         btns = ButtonMaker()
         btns.ibutton('Bot Stats', f'wzmlx {user_id} stats stbot')
         btns.ibutton('OS Stats', f'wzmlx {user_id} stats stsys')
-        btns.ibutton('Repo Stats', f'wzmlx {OWNER_ID} stats strepo')
+        btns.ibutton('Repo Stats', f'wzmlx {user_id} stats strepo')
         btns.ibutton('Bot Limits', f'wzmlx {user_id} stats botlimits')
         msg = "⌬ <b><i>Bot & OS Statistics!</i></b>"
     elif key == "stbot":
@@ -561,6 +561,12 @@ async def get_stats(event, key="home"):
             cpu_use=len(Process().cpu_affinity()),
         )
     elif key == "strepo":
+        # Owner check
+        if event.from_user.id != OWNER_ID:
+            # Popup alert for non-owner
+            await event.answer("🚫 Only Owner can check Repo Stats!", show_alert=True)
+            return
+
         last_commit, changelog = 'No Data', 'N/A'
         if await aiopath.exists('.git'):
             last_commit = (await cmd_exec("git log -1 --pretty='%cd ( %cr )' --date=format-local:'%d/%m/%Y'", True))[0]
