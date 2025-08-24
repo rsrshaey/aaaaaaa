@@ -25,7 +25,7 @@ async def mirror_status(_, message):
         msg = BotTheme('NO_ACTIVE_DL', cpu=cpu_percent(), free=free, free_p=round(100-disk_usage(config_dict['DOWNLOAD_DIR']).percent, 1),
                        ram=virtual_memory().percent, uptime=currentTime)
         reply_message = await sendMessage(message, msg)
-        await auto_delete_message(message, reply_message)
+        # await auto_delete_message(message, reply_message)
     else:
         await sendStatusMessage(message)
         await deleteMessage(message)
