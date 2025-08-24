@@ -12,16 +12,16 @@ async def send_react(message):
             "🔥",
             "🥰",
             "❤️",
-            "❤️‍🔥",
+            "😊",
             "💯",
             "⚡",
             "💋",
             "😘",
-            "🥹",
+            "😁",
             "😍",
             "🥺",
             "🤯",
-            "🩵",
+            "😇",
         }
 
         if available_reactions:
